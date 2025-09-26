@@ -1,67 +1,107 @@
-// pages/DashboardPage.tsx - 仪表板页面
-import React from 'react';
-import { Card, Statistic, Row, Col } from 'antd';
-import {
-    MessageOutlined,
-    UserOutlined,
-    ClockCircleOutlined,
-    CheckCircleOutlined
-} from '@ant-design/icons';
+// TableDemo.tsx
+import React, {useState} from 'react';
+import {Table, Tag, Divider, Input,Row, Col} from 'antd';
+import {SmileOutlined, DownOutlined} from '@ant-design/icons';
+import type {ColumnsType} from 'antd/es/table';
 
-interface DashboardPageProps {
-    isMobile: boolean;
+interface DataType {
+    key: string;
+    name: string;
+    age: number;
+    position: string;
+    wages: number;
 }
 
-const DashboardPage: React.FC<DashboardPageProps> = ({ isMobile }) => {
+const columns: ColumnsType<DataType> = [
+    {
+        title: '姓名',
+        dataIndex: 'name',
+        key: 'name',
+        // 自定义表头
+        render: (_, {name}) => (
+            <span>
+                {name}
+            </span>
+        ),
+    },
+    {
+        title: '年龄',
+        dataIndex: 'age',
+        key: 'age',
+    },
+    {
+        title: '职位',
+        dataIndex: 'position',
+        key: 'position',
+    },
+    {
+        title: 'Tags',
+        key: 'wages',
+        dataIndex: 'wages'
+    },
+    {
+        title: 'Action',
+        key: 'action',
+        render: (_, record) => (
+            <>
+                <a>重新计算</a>
+            </>
+        ),
+    },
+];
+
+const data: DataType[] = [
+    {
+        key: '1',
+        name: '张三',
+        age: 32,
+        position: '员工',
+        wages: 3000,
+    },
+    {
+        key: '2',
+        name: '李四',
+        age: 42,
+        position: '主管',
+        wages: 6000,
+    },
+    {
+        key: '3',
+        name: '王五',
+        age: 32,
+        position: '工程师',
+        wages: 9000,
+    },
+];
+
+const {Search} = Input
+
+const DashboardPage: React.FC = () => {
+    const {value, setValue} = useState<DataType>()
+    const onSearch = (val: string) => {
+        console.log(val)
+    }
     return (
-        <Card title="仪表板">
-            <Row gutter={isMobile ? 8 : 16}>
-                <Col span={isMobile ? 12 : 6}>
-                    <Card>
-                        <Statistic
-                            title="总对话数"
-                            value={1248}
-                            prefix={<MessageOutlined />}
-                        />
-                    </Card>
+        <div>
+            <div style={{margin:"8px 0px",fontWeight:"bold",fontSize:"20px"}}>工资列表</div>
+            <Row gutter={8} align="middle" style={{margin: "8px 0px"}}>
+                <Col span={8}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{width:"50px"}}>姓名：</span>
+                        <Search style={{width:"300px"}} allowClear enterButton placeholder="请输入关键词" />
+                    </div>
                 </Col>
-                <Col span={isMobile ? 12 : 6}>
-                    <Card>
-                        <Statistic
-                            title="活跃用户"
-                            value={156}
-                            prefix={<UserOutlined />}
-                        />
-                    </Card>
-                </Col>
-                <Col span={isMobile ? 12 : 6}>
-                    <Card>
-                        <Statistic
-                            title="系统运行"
-                            value={24}
-                            suffix="天"
-                            prefix={<ClockCircleOutlined />}
-                        />
-                    </Card>
-                </Col>
-                <Col span={isMobile ? 12 : 6}>
-                    <Card>
-                        <Statistic
-                            title="完成任务"
-                            value={89}
-                            prefix={<CheckCircleOutlined />}
-                        />
-                    </Card>
+
+                <Col span={8}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{width:"50px"}}>职位：</span>
+                        <Search style={{width:"300px"}} allowClear enterButton placeholder="请输入关键词" />
+                    </div>
                 </Col>
             </Row>
-
-            <div style={{ marginTop: isMobile ? '20px' : '40px', padding: isMobile ? '10px' : '20px' }}>
-                <h2>系统概览</h2>
-                <p>欢迎使用AI管理系统</p>
-                <p>当前时间：{new Date().toLocaleString()}</p>
-            </div>
-        </Card>
-    );
-};
+            <Table columns={columns} dataSource={data}/>
+        </div>
+    )
+}
 
 export default DashboardPage;

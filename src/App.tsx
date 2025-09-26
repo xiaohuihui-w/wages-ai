@@ -73,11 +73,11 @@ const App: React.FC = () => {
 
     const menuItems: MenuItem[] = [
         { key: 'home', icon: <HomeOutlined />, label: '首页' },
-        { key: 'dashboard', icon: <DashboardOutlined />, label: '仪表板' },
+        { key: 'dashboard', icon: <DashboardOutlined />, label: '工资表' },
         { key: 'chat', icon: <MessageOutlined />, label: '对话历史' },
         { key: 'apps', icon: <AppstoreOutlined />, label: '应用中心' },
-        { key: 'contacts', icon: <TeamOutlined />, label: '联系人' },
-        { key: 'documents', icon: <FileTextOutlined />, label: '文档' },
+        { key: 'contacts', icon: <TeamOutlined />, label: '用户表' },
+        { key: 'documents', icon: <FileTextOutlined />, label: '工资结构' },
         { key: 'settings', icon: <SettingOutlined />, label: '设置' },
     ];
 
@@ -143,7 +143,7 @@ const App: React.FC = () => {
                             alignItems: 'center'
                         }}>
                             <RobotOutlined style={{ marginRight: '8px', color: '#1890ff' }} />
-                            <span>AI管理平台</span>
+                            <span>智能工资管理平台</span>
                         </div>
                         <Button
                             type="text"
@@ -175,7 +175,7 @@ const App: React.FC = () => {
                     style={{ background: '#fff' }}
                 >
                     <div style={{
-                        height: '64px',
+                        height: '40px',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: state.collapsed ? 'center' : 'space-between',
@@ -184,13 +184,13 @@ const App: React.FC = () => {
                     }}>
                         {!state.collapsed && (
                             <div style={{
-                                fontSize: '18px',
+                                fontSize: '16px',
                                 fontWeight: 'bold',
                                 display: 'flex',
                                 alignItems: 'center'
                             }}>
                                 <RobotOutlined style={{ marginRight: '8px', color: '#1890ff' }} />
-                                <span>AI管理平台</span>
+                                <span>智能工资管理平台</span>
                             </div>
                         )}
                     </div>
